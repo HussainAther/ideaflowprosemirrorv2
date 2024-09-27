@@ -50,11 +50,12 @@ const App = () => {
                     match = '';
                     type = 'relation';
                 } else if (showSuggestions) {
-                    match = text.match(/[#@<>]\w*$/);
+                    match = text.match(/([#@<>]\w*)$/); // Refined regex for capturing match string
                 }
 
                 if (match !== null || (type && showSuggestions)) {
-                    const suggestions = getSuggestions(type || match[0][0]);
+                    const matchType = type || match[0][0];
+                    const suggestions = getSuggestions(matchType, match ? match[0].slice(1) : ''); // Pass match string for filtering
                     setSuggestions(suggestions);
                     setShowSuggestions(true);
                     setActiveIndex(0);
@@ -71,13 +72,16 @@ const App = () => {
         setView(editorView);
     }, []);
 
-    const getSuggestions = (type) => {
+    const getSuggestions = (type, matchString) => {
+        let baseSuggestions = [];
         switch (type) {
-            case '#': return HASHTAGS;
-            case '@': return PEOPLE;
-            case '<>': return RELATIONS;
+            case '#': baseSuggestions = HASHTAGS; break;
+            case '@': baseSuggestions = PEOPLE; break;
+            case '<>': baseSuggestions = RELATIONS; break;
             default: return [];
         }
+        // Filter suggestions based on matchString
+        return baseSuggestions.filter(suggestion => suggestion.toLowerCase().includes(matchString.toLowerCase()));
     };
 
     const handleSelect = (suggestion) => {
