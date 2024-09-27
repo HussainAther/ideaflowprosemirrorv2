@@ -31,7 +31,7 @@ This project is a full-stack implementation of an autocomplete feature using Dra
    ```
 2. **Navigate to the Project Directory and Install Dependencies:**
    ```bash
-   cd ideaflowprosemirror
+   cd ideaflowprosemirrorv2
    yarn install
    ```
 3. **Navigate to the Example Directory and Install Dependencies:**
