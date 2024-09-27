@@ -8,7 +8,6 @@ import './App.css';
 
 const App = () => {
     const editorRef = useRef(null);
-    const [editorView, setEditorView] = React.useState(null);
 
     useEffect(() => {
         const state = EditorState.create({
@@ -16,14 +15,11 @@ const App = () => {
             plugins: [autocompletePlugin],
         });
 
-        const view = new EditorView(editorRef.current, {
+        // Initialize the ProseMirror editor
+        new EditorView(editorRef.current, {
             state,
         });
-        setEditorView(view);
 
-        return () => {
-            view.destroy();
-        };
     }, []);
 
     return <div ref={editorRef} className="editor" />;
