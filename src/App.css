@@ -1,10 +1,16 @@
-.Title {
-  text-align: center;
+/* src/App.css */
+.editor-container {
+    position: relative;
 }
 
-.Editor {
-  max-width: 400px;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid black;
+.editor {
+    padding: 10px;
+    min-height: 300px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
+
+.suggestions-dropdown {
+    max-width: 200px;
+}
+
