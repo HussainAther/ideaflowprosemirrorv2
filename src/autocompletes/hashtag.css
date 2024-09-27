@@ -1,0 +1,25 @@
+/* src/autocompletes/hashtag.css */
+.Hashtag {
+  background: #e0f7fa;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.HashtagList {
+  position: absolute;
+  margin: 5px 0 0 0;
+  padding: 0;
+  list-style: none;
+  background: #ffffff;
+  box-shadow: 0 0 2px black;
+}
+
+.HashtagListItem {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.HashtagListItem.current {
+  background: #b2ebf2;
+}
+

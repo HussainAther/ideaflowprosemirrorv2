@@ -1,0 +1,25 @@
+/* src/autocompletes/mention.css */
+.Mention {
+  background: #d1c4e9;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.MentionList {
+  position: absolute;
+  margin: 5px 0 0 0;
+  padding: 0;
+  list-style: none;
+  background: #ffffff;
+  box-shadow: 0 0 2px black;
+}
+
+.MentionListItem {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.MentionListItem.current {
+  background: #b39ddb;
+}
+
