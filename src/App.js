@@ -1,54 +1,33 @@
-import React, { Component } from 'react';
+// src/App.js
+import React, { useEffect, useRef } from 'react';
+import { EditorState } from 'prosemirror-state';
+import { EditorView } from 'prosemirror-view';
+import { schema } from 'prosemirror-schema-basic';
+import autocompletePlugin from './plugins/autocomplete'; // Import your autocomplete plugin
 import './App.css';
-import { Editor, EditorState } from 'draft-js';
-import Autocomplete from 'draft-js-autocomplete';
 
-import 'draft-js/dist/Draft.css';
+const App = () => {
+    const editorRef = useRef(null);
+    const [editorView, setEditorView] = React.useState(null);
 
-import mention from './autocompletes/mention';
-import hashtag from './autocompletes/hashtag';
-import relation from './autocompletes/relation'; // Ensure relation is imported
+    useEffect(() => {
+        const state = EditorState.create({
+            schema,
+            plugins: [autocompletePlugin],
+        });
 
-import './autocompletes/mention.css';
-import './autocompletes/hashtag.css';
-import './autocompletes/relation.css';
+        const view = new EditorView(editorRef.current, {
+            state,
+        });
+        setEditorView(view);
 
+        return () => {
+            view.destroy();
+        };
+    }, []);
 
-class App extends Component {
-
-  autocompletes = [
-    mention,
-    hashtag,
-    relation // Add relation to the autocompletes array
-  ];
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      editorState: EditorState.createEmpty()
-    }
-  }
-
-  onChange = (editorState) => {
-    this.setState({ editorState })
-  };
-
-  render() {
-    const { editorState } = this.state;
-
-    return (
-      <React.Fragment>
-        <h1 className="Title">Ideaflow app</h1>
-        <div className="Editor">
-          <Autocomplete editorState={editorState} onChange={this.onChange} autocompletes={this.autocompletes}>
-            <Editor />
-          </Autocomplete>
-        </div>
-      </React.Fragment>
-    );
-  }
-}
+    return <div ref={editorRef} className="editor" />;
+};
 
 export default App;
 
